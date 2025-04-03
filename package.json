@@ -1,0 +1,11 @@
+{
+  "name": "zv-crawler-tool",
+  "version": "1.0.13",
+  "description": "爬虫工具包",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "fushiliang <994301536@qq.com>",
+  "license": "ISC"
+}
