@@ -1,0 +1,30 @@
+version: '1.0'
+name: data-verification-publish_to_npmjs
+displayName: publish_to_npmjs
+triggers:
+  trigger: auto
+  push:
+    branches:
+      precise:
+        - master
+variables:
+  global:
+    - NODE_AUTH_TOKEN
+stages:
+  - name: stage-2dcb4156
+    displayName: 发布
+    strategy: naturally
+    trigger: auto
+    executor: []
+    steps:
+      - step: build@nodejs
+        name: publish_to_npmjs
+        displayName: 发布到npmjs
+        nodeVersion: 20.10.0
+        commands:
+          - echo //registry.npmjs.org/:_authToken=${NODE_AUTH_TOKEN} >> .npmrc
+          - npm publish
+        caches: []
+        notify: []
+        strategy:
+          retry: '0'
