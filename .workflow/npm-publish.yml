@@ -1,5 +1,5 @@
 version: '1.0'
-name: data-verification-publish_to_npmjs
+name: publish_to_npmjs
 displayName: publish_to_npmjs
 triggers:
   trigger: auto
