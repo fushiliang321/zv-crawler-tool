@@ -7,13 +7,16 @@ export default class pool {
 
     #pause = undefined
 
-    constructor(num) {
+    constructor(num = 1) {
         this.setConcurrencyNum(num)
         this.open()
     }
 
     //设置并发数量
     setConcurrencyNum(num) {
+        if (num < 1) {
+            num = 1
+        }
         this.concurrencyNum = num
     }
 
@@ -94,6 +97,6 @@ export default class pool {
     }
 }
 
-export function New(num) {
+export function New(num = 1) {
     return new pool(num)
 }

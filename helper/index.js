@@ -19,8 +19,8 @@ export function exportFile(data, filename = 'data.csv') {
 export function exportArr(arr, filename){
     let text = ''
     arr.forEach(element => {
-        element.forEach(e=>{
-            text += '"'+ e.replaceAll('"',"'") + '",'
+        element.forEach(e => {
+            text += '"'+ String(e).replaceAll('"',"'") + '",'
         })
         text += '\n'
     })
