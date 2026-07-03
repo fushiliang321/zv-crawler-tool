@@ -7,5 +7,10 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "fushiliang <994301536@qq.com>",
-  "license": "ISC"
+  "license": "ISC",
+  "homepage": "https://github.com/fushiliang321/zv-crawler-tool",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fushiliang321/zv-crawler-tool.git"
+  }
 }
