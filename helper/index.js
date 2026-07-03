@@ -16,13 +16,13 @@ export function exportFile(data, filename = 'data.csv') {
     URL.revokeObjectURL(url)
 }
 
-export function exportArr(arr, filename){
+export function exportArr(arr, filename = 'data.csv'){
     let text = ''
-    arr.forEach(element => {
-        element.forEach(e => {
+    for (const element of arr) {
+        for (const e of element) {
             text += '"'+ String(e).replaceAll('"',"'") + '",'
-        })
+        }
         text += '\n'
-    })
+    }
     exportFile(text, filename)
 }

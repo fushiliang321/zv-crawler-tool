@@ -38,14 +38,14 @@ export function fetch(input, init) {
   })
 }
 
-export function exportArr(data) {
+export function exportArr(data, filename = 'data.csv') {
   return postMessage({
     funName: 'exportArr',
     arguments: arguments,
   })
 }
 
-export function exportData(data, filename) {
+export function exportData(data, filename = 'data.csv') {
   return postMessage({
     funName: 'exportData',
     arguments: arguments,
