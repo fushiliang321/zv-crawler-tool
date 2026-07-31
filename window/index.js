@@ -5,11 +5,16 @@ let taskId = 0
 
 window.addEventListener('message', (event) => {
     const data = JSON.parse(event.data)
-    if (!data.taskId || !taskMap[data.taskId] || !taskMap[data.taskId].resolve) {
+    const task = taskMap[data?.taskId]
+    if (!task.resolve || !task.reject) {
       return
     }
-    taskMap[data.taskId].resolve(data.result)
     delete taskMap[data.taskId]
+    if (data.error) {
+      task.reject(data.error)
+    } else {
+      task.resolve(data.result)
+    }
 })
 
 export function postMessage(data) {
