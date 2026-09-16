@@ -20,7 +20,6 @@ function table() {
     return _table
 }
 
-
 export async function has(key: string): Promise<boolean> {
     const res = await table().get(key) as store<unknown> | undefined;
     return (!!res && res.hasOwnProperty('value'))
