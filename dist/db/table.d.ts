@@ -18,7 +18,7 @@ export default class Table {
      * @param key
      * @returns
      */
-    put(value: any, key: IDBValidKey, replace: boolean): Promise<IDBValidKey | false>;
+    put(value: any, key?: IDBValidKey, replace?: boolean): Promise<IDBValidKey | false>;
     /**
      * 通过索引更新数据
      * @param indexKey

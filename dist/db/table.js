@@ -33,7 +33,7 @@ export default class Table {
      * @param key
      * @returns
      */
-    async put(value, key, replace) {
+    async put(value, key, replace = false) {
         const store = await this.store('readwrite');
         if (!store) {
             return false;

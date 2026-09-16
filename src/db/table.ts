@@ -39,7 +39,7 @@ export default class Table{
      * @param key
      * @returns
      */
-    async put(value: any, key: IDBValidKey, replace: boolean): Promise<IDBValidKey | false> {
+    async put(value: any, key?: IDBValidKey, replace: boolean = false): Promise<IDBValidKey | false> {
         const store = await this.store('readwrite')
         if (!store) {
             return false
