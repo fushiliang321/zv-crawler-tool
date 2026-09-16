@@ -1,11 +1,11 @@
 {
   "name": "zv-crawler-tool",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "description": "爬虫工具包",
   "type": "module",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
-  "files": ["dist"],
+  "files": ["dist", "data"],
   "scripts": {
     "build": "tsc",
     "dev": "tsc --watch"
