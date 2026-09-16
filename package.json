@@ -1,6 +1,6 @@
 {
   "name": "zv-crawler-tool",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "爬虫工具包",
   "type": "module",
   "main": "dist/index.js",
@@ -17,9 +17,9 @@
     },
     "./*": {
       "types": "./dist/*.d.ts",
-      "import": "./dist/*.js"
+      "import": ["./dist/*.js", "./dist/*/index.js"]
     },
-    "./data/*": "./data/*",
+    "./data/*": ["./data/*", "./data/*.json"],
     "./package.json": "./package.json"
   },
   "author": "fushiliang <994301536@qq.com>",
