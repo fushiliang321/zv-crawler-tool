@@ -17,7 +17,7 @@
     },
     "./*": {
       "types": "./dist/*.d.ts",
-      "import": ["./dist/*.js", "./dist/*/index.js"]
+      "import": ["./dist/*","./dist/*/index.js"]
     },
     "./data/*": ["./data/*", "./data/*.json"],
     "./package.json": "./package.json"
