@@ -1,10 +1,26 @@
 {
   "name": "zv-crawler-tool",
-  "version": "1.0.17",
+  "version": "1.1.0",
   "description": "爬虫工具包",
-  "main": "index.js",
+  "type": "module",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": ["dist"],
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "tsc",
+    "dev": "tsc --watch"
+  },
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    },
+    "./*": {
+      "types": "./dist/*.d.ts",
+      "import": "./dist/*.js"
+    },
+    "./data/*": "./data/*",
+    "./package.json": "./package.json"
   },
   "author": "fushiliang <994301536@qq.com>",
   "license": "ISC",
@@ -12,5 +28,8 @@
   "repository": {
     "type": "git",
     "url": "git+https://github.com/fushiliang321/zv-crawler-tool.git"
+  },
+  "devDependencies": {
+    "typescript": "^7.0.2"
   }
 }

@@ -1,0 +1,28 @@
+
+export function download(url: string, fileName: string) {
+    const a = document.createElement('a')
+    a.href = url
+    a.target = 'target'
+    a.download = fileName
+    document.body.appendChild(a)
+    a.click();
+    document.body.removeChild(a)
+}
+
+export function exportFile(data: BlobPart, filename = 'data.csv') {
+    const blob = new Blob([new Uint8Array([0xEF, 0xBB, 0xBF]), data], { type: 'text/plain;charset=utf-8' })
+    const url = URL.createObjectURL(blob)
+    download(url,filename)
+    URL.revokeObjectURL(url)
+}
+
+export function exportArr(arr: unknown[][], filename = 'data.csv'){
+    let text = ''
+    for (const element of arr) {
+        for (const e of element) {
+            text += '"'+ String(e).replaceAll('"',"'") + '",'
+        }
+        text += '\n'
+    }
+    exportFile(text, filename)
+}
