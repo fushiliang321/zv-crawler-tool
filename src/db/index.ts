@@ -1,7 +1,6 @@
 import indexedDBClass, { tableConfig } from './indexedDB'
 import Table from './table'
 
-
 export default (name = 'default', config: tableConfig = {}) => {
     const _map: Record<string, tableConfig> = {}
     _map[name] = config

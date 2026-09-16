@@ -1,35 +1,49 @@
 import db from 'zv-crawler-tool/db'
-
-const table = db('opensupplyhub.org_cache')
+import Table from '../db/table'
 
 type store<T extends unknown> = {
     id: string,
     value: T
 }
 
+let cacheDbName = 'cache'
+
+export function setName(name: string): void {
+    cacheDbName = name
+}
+
+let _table: Table
+function table() {
+    if (!_table) {
+        _table = db(cacheDbName)
+    }
+    return _table
+}
+
+
 export async function has(key: string): Promise<boolean> {
-    const res = await table.get(key) as store<unknown> | undefined;
+    const res = await table().get(key) as store<unknown> | undefined;
     return (!!res && res.hasOwnProperty('value'))
 }
 
 export async function get<T>(key: string): Promise<T|undefined> {
-    const res = await table.get(key) as store<T> | undefined
+    const res = await table().get(key) as store<T> | undefined
     return res ? res?.value : undefined
 }
 
 export async function getAll() {
-    const res = await table.getAll()
+    const res = await table().getAll()
     return res
 }
 
 export async function set(key: string, value: unknown) {
- return await table.put({
+ return await table().put({
     id: key,
     value: value
   })
 }
 
 export async function del(key: string) {
- return await table.delete(key)
+ return await table().delete(key)
 }
 
