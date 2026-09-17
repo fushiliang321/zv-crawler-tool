@@ -1,3 +1,5 @@
+import { arrays, string } from "./csvExport";
+
 const taskSuffix = String(Math.random())
 const taskMap: Record<string, { resolve: Function; reject: Function }> = {}
 
@@ -44,15 +46,9 @@ export function fetch(input: RequestInfo | URL, init?: RequestInit): Promise<Res
 }
 
 export function exportArr(data: unknown[][], filename = 'data.csv'): Promise<any> {
-  return postMessage({
-    funName: 'exportArr',
-    arguments: arguments,
-  })
+  return arrays(data, filename)
 }
 
 export function exportData(data: string, filename = 'data.csv'): Promise<any> {
-  return postMessage({
-    funName: 'exportData',
-    arguments: arguments,
-  })
+  return string(data, filename)
 }

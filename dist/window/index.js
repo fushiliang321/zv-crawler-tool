@@ -1,3 +1,4 @@
+import { arrays, string } from "./csvExport";
 const taskSuffix = String(Math.random());
 const taskMap = {};
 let taskId = 0;
@@ -40,15 +41,9 @@ export function fetch(input, init) {
     });
 }
 export function exportArr(data, filename = 'data.csv') {
-    return postMessage({
-        funName: 'exportArr',
-        arguments: arguments,
-    });
+    return arrays(data, filename);
 }
 export function exportData(data, filename = 'data.csv') {
-    return postMessage({
-        funName: 'exportData',
-        arguments: arguments,
-    });
+    return string(data, filename);
 }
 //# sourceMappingURL=index.js.map
