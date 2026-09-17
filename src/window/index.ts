@@ -38,7 +38,7 @@ export function postMessage(data: {taskId?: string, arguments?: IArguments|unkno
   return promise
 }
 
-export function fetch(input: RequestInfo | URL, init?: RequestInit): Promise<Response> {
+export function fetch<T extends any>(input: RequestInfo | URL, init?: RequestInit): Promise<T> {
   return postMessage({
     funName: 'fetch',
     arguments: arguments,
