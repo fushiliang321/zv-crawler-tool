@@ -1,6 +1,6 @@
 {
   "name": "zv-crawler-tool",
-  "version": "1.1.8",
+  "version": "1.1.9",
   "description": "爬虫工具包",
   "type": "module",
   "main": "dist/index.js",
