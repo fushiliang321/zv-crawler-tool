@@ -3,7 +3,7 @@ var logType;
     logType[logType["info"] = 0] = "info";
     logType[logType["error"] = 1] = "error";
 })(logType || (logType = {}));
-class logs {
+export class logs {
     limit = 10;
     list = [];
     constructor(limit) {
@@ -28,5 +28,4 @@ class logs {
         });
     }
 }
-export {};
 //# sourceMappingURL=index.js.map
