@@ -6,7 +6,7 @@ var logType;
 export class logs {
     limit = 10;
     list = [];
-    constructor(limit) {
+    constructor(limit = 10) {
         this.limit = limit;
     }
     push(log) {

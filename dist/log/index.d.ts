@@ -9,7 +9,7 @@ type log = {
 export declare class logs {
     limit: number;
     list: log[];
-    constructor(limit: number);
+    constructor(limit?: number);
     push(log: log): void;
     info(data: any): void;
     error(data: any): void;

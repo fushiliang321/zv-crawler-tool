@@ -13,7 +13,7 @@ export class logs {
     limit: number = 10
     list: log[] = []
 
-    constructor(limit: number) {
+    constructor(limit: number = 10) {
         this.limit = limit
     }
 
