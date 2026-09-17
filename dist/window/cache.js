@@ -1,5 +1,5 @@
 import { postMessage } from "./index";
-export const localStorage1 = {
+export const localStorage = {
     get(key) {
         return postMessage({
             funName: 'localStorage.getItem',

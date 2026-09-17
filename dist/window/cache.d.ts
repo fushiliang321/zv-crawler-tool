@@ -1,4 +1,4 @@
-export declare const localStorage1: {
+export declare const localStorage: {
     get(key: string): Promise<string>;
     key(index: number): Promise<string | null>;
     remove(key: string): Promise<void>;
