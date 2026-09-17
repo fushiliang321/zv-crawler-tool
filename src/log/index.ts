@@ -9,7 +9,7 @@ type log = {
     data: any
 }
 
-export class logs {
+export default class logs {
     limit: number = 10
     list: log[] = []
 

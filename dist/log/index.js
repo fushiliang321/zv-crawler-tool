@@ -3,7 +3,7 @@ var logType;
     logType[logType["info"] = 0] = "info";
     logType[logType["error"] = 1] = "error";
 })(logType || (logType = {}));
-export class logs {
+export default class logs {
     limit = 10;
     list = [];
     constructor(limit = 10) {

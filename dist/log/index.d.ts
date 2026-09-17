@@ -6,7 +6,7 @@ type log = {
     type: logType;
     data: any;
 };
-export declare class logs {
+export default class logs {
     limit: number;
     list: log[];
     constructor(limit?: number);
