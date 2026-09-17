@@ -52,3 +52,9 @@ export function exportArr(data: unknown[][], filename = 'data.csv'): Promise<any
 export function exportData(data: string, filename = 'data.csv'): Promise<any> {
   return string(data, filename)
 }
+
+export function win(key: string): any {
+ return postMessage({
+    funName: key,
+  })
+}

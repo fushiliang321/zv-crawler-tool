@@ -46,4 +46,9 @@ export function exportArr(data, filename = 'data.csv') {
 export function exportData(data, filename = 'data.csv') {
     return string(data, filename);
 }
+export function win(key) {
+    return postMessage({
+        funName: key,
+    });
+}
 //# sourceMappingURL=index.js.map
