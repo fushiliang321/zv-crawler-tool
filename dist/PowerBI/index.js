@@ -66,38 +66,47 @@ export default class PowerBI {
                     vacancys.push(String(v));
                 }
             }
-            item.S && this.setHeaders(item.S); //设置表头
-            for (const key in seatDecode) {
-                if (!item.hasOwnProperty(key)) {
-                    continue;
-                }
-                const keyVacancys = seatDecode[key](item[key], this.headers.length);
-                for (const i in keyVacancys) {
-                    if (!vacancys.hasOwnProperty(i) || keyVacancys[i] !== '0') {
-                        vacancys[i] = keyVacancys[i];
-                    }
+            const keys = Object.keys(item);
+            const lineIndexs = this.getEmptyLine(); //当前行的字典索引
+            if (keys.length === 1 && keys[0] === 'C' && item.C.length === lineIndexs.length) {
+                //只有一个C字段
+                for (let i = 0; i < item.C.length; i++) {
+                    lineIndexs[i] = item.C[i];
                 }
             }
-            const lineIndexs = this.getEmptyLine(); //当前行的字典索引
-            let cIndex = 0;
-            let x = false;
-            for (const i in vacancys) {
-                switch (vacancys[i]) {
-                    case '0':
-                        //有空位
-                        lineIndexs[i] = item.C[cIndex++];
-                        break;
-                    case '1':
-                        //复用上一行的数据
-                        lineIndexs[i] = lastLineIndexs[i];
-                        break;
-                    case '-1':
-                        //空数据
-                        x = true;
-                        lineIndexs[i] = null;
-                        break;
-                    default:
-                        lineIndexs[i] = item.C[cIndex++];
+            else {
+                item.S && this.setHeaders(item.S); //设置表头
+                for (const key in seatDecode) {
+                    if (!item.hasOwnProperty(key)) {
+                        continue;
+                    }
+                    const keyVacancys = seatDecode[key](item[key], this.headers.length);
+                    for (const i in keyVacancys) {
+                        if (!vacancys.hasOwnProperty(i) || keyVacancys[i] !== '0') {
+                            vacancys[i] = keyVacancys[i];
+                        }
+                    }
+                }
+                let cIndex = 0;
+                let x = false;
+                for (const i in vacancys) {
+                    switch (vacancys[i]) {
+                        case '0':
+                            //有空位
+                            lineIndexs[i] = item.C[cIndex++];
+                            break;
+                        case '1':
+                            //复用上一行的数据
+                            lineIndexs[i] = lastLineIndexs[i];
+                            break;
+                        case '-1':
+                            //空数据
+                            x = true;
+                            lineIndexs[i] = null;
+                            break;
+                        default:
+                            lineIndexs[i] = item.C[cIndex++];
+                    }
                 }
             }
             lastLineIndexs = lineIndexs;
