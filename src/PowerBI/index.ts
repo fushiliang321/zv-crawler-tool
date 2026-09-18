@@ -37,7 +37,7 @@ export default class PowerBI {
 	headers: any[] = []
 	headerPropertys: string[] = []
 
-	async extractResponseData(data: any): Promise<Record<string, unknown>[]> {
+	extractResponseData(data: any): Record<string, unknown>[] {
 		const DM = data.results[0].result.data.dsr.DS[0].PH[0].DM0
 		const valueDicts = data.results[0].result.data.dsr.DS[0].ValueDicts
 		this.headerPropertys.length = 0
@@ -63,7 +63,7 @@ export default class PowerBI {
 		seatDecode[key]!(dmItem[key]!, this.headers.length)
 	}
 
-	async decodeListDM(dm: any[], dicts: any[]): Promise<Record<string, unknown>[]> {
+	decodeListDM(dm: any[], dicts: any[]): Record<string, unknown>[] {
 		const listData: Record<string, unknown>[] = []
 
 		let lastLineIndexs: (string|null)[] = [] //上一行的字典索引

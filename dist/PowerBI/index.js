@@ -33,7 +33,7 @@ export default class PowerBI {
     lineLength = 0;
     headers = [];
     headerPropertys = [];
-    async extractResponseData(data) {
+    extractResponseData(data) {
         const DM = data.results[0].result.data.dsr.DS[0].PH[0].DM0;
         const valueDicts = data.results[0].result.data.dsr.DS[0].ValueDicts;
         this.headerPropertys.length = 0;
@@ -56,7 +56,7 @@ export default class PowerBI {
         }
         seatDecode[key](dmItem[key], this.headers.length);
     }
-    async decodeListDM(dm, dicts) {
+    decodeListDM(dm, dicts) {
         const listData = [];
         let lastLineIndexs = []; //上一行的字典索引
         for (const item of dm) {
