@@ -16,12 +16,15 @@ export function arrays(data: unknown[][], filename = defaultFileName): Promise<a
   })
 }
 
-export function objects(data: (Record<string, any>)[], filename = defaultFileName): Promise<any> {
+export function objects(data: (Record<string, any>)[], keys: string[] | undefined = undefined,filename = defaultFileName): Promise<any> {
   const arr = []
-  let keySet = new Set<string>()
+  let keySet = new Set<string>(keys ?? [])
   for (const item of data) {
-    //每条数据的key可能会不一样，获取所有key
-    keySet = new Set([...keySet, ...Object.keys(item)])
+    if (!keys) {
+      //如果没有指定key的话就自动从数据中提取所有key
+      //每条数据的key可能会不一样，获取所有key
+      keySet = new Set([...keySet, ...Object.keys(item)])
+    }
     const values = []
     if (!item) {
         continue

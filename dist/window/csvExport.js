@@ -12,12 +12,15 @@ export function arrays(data, filename = defaultFileName) {
         arguments: arguments,
     });
 }
-export function objects(data, filename = defaultFileName) {
+export function objects(data, keys = undefined, filename = defaultFileName) {
     const arr = [];
-    let keySet = new Set();
+    let keySet = new Set(keys ?? []);
     for (const item of data) {
-        //每条数据的key可能会不一样，获取所有key
-        keySet = new Set([...keySet, ...Object.keys(item)]);
+        if (!keys) {
+            //如果没有指定key的话就自动从数据中提取所有key
+            //每条数据的key可能会不一样，获取所有key
+            keySet = new Set([...keySet, ...Object.keys(item)]);
+        }
         const values = [];
         if (!item) {
             continue;
