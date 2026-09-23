@@ -1,11 +1,14 @@
 {
   "name": "zv-crawler-tool",
-  "version": "1.1.19",
+  "version": "1.1.20",
   "description": "爬虫工具包",
   "type": "module",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
-  "files": ["dist", "data"],
+  "files": [
+    "dist",
+    "data"
+  ],
   "scripts": {
     "build": "tsc",
     "dev": "tsc --watch"
@@ -17,9 +20,15 @@
     },
     "./*": {
       "types": "./dist/*.d.ts",
-      "import": ["./dist/*","./dist/*/index.js"]
+      "import": [
+        "./dist/*",
+        "./dist/*/index.js"
+      ]
     },
-    "./data/*": ["./data/*", "./data/*.json"],
+    "./data/*": [
+      "./data/*",
+      "./data/*.json"
+    ],
     "./package.json": "./package.json"
   },
   "author": "fushiliang <994301536@qq.com>",
@@ -31,5 +40,8 @@
   },
   "devDependencies": {
     "typescript": "^7.0.2"
+  },
+  "dependencies": {
+    "date-fns": "^4.4.0"
   }
 }

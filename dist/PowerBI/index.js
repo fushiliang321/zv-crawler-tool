@@ -1,3 +1,4 @@
+import { format as dateFormat } from 'date-fns';
 //已知的md键值
 const knownMDKeys = ['C', 'R', 'Ø', 'S'];
 //解码出空位
@@ -33,13 +34,25 @@ export default class PowerBI {
     lineLength = 0;
     headers = [];
     headerPropertys = [];
+    formatMap = {}; //值的格式
     extractResponseData(data) {
+        //整理出表头字段
+        this.headerPropertys.length = 0;
+        for (const grouping of data.results[0].result.data.descriptor.Expressions.Primary.Groupings) {
+            for (const key of grouping.Keys) {
+                this.headerPropertys.push(key.Source.Property);
+            }
+        }
+        //获取每个字段值的格式（如果有）
+        for (const item of data.results[0].result.data.descriptor.Select) {
+            if (item.Format === undefined) {
+                continue;
+            }
+            //返回的时间格式：yyyy\\-MM\\-dd，多了出了\\
+            this.formatMap[item.Value] = item.Format.replace(/\\-/g, '-');
+        }
         const DM = data.results[0].result.data.dsr.DS[0].PH[0].DM0;
         const valueDicts = data.results[0].result.data.dsr.DS[0].ValueDicts;
-        this.headerPropertys.length = 0;
-        for (let key of data.results[0].result.data.descriptor.Expressions.Primary.Groupings[0].Keys) {
-            this.headerPropertys.push(key.Source.Property);
-        }
         return this.decodeListDM(DM, valueDicts);
     }
     getEmptyLine() {
@@ -54,7 +67,7 @@ export default class PowerBI {
         if (!seatDecode.hasOwnProperty(key) || !dmItem.hasOwnProperty(key)) {
             return;
         }
-        seatDecode[key](dmItem[key], this.headers.length);
+        return seatDecode[key](dmItem[key], this.headers.length);
     }
     decodeListDM(dm, dicts) {
         const listData = [];
@@ -77,10 +90,10 @@ export default class PowerBI {
             else {
                 item.S && this.setHeaders(item.S); //设置表头
                 for (const key in seatDecode) {
-                    if (!item.hasOwnProperty(key)) {
+                    const keyVacancys = this.seatDecode(item, key);
+                    if (!keyVacancys) {
                         continue;
                     }
-                    const keyVacancys = seatDecode[key](item[key], this.headers.length);
                     for (const i in keyVacancys) {
                         if (!vacancys.hasOwnProperty(i) || keyVacancys[i] !== '0') {
                             vacancys[i] = keyVacancys[i];
@@ -140,7 +153,16 @@ export default class PowerBI {
                     }
                     break;
                 case 7:
-                    line[i] = indexs[i];
+                    //日期
+                    const format = this.formatMap[this.headers[i].N];
+                    if (format !== undefined) {
+                        //有格式
+                        line[i] = dateFormat(new Date(indexs[i]), format);
+                    }
+                    else {
+                        //没有定义格式
+                        line[i] = indexs[i];
+                    }
                     break;
                 default:
                     console.log('未知的T', this.headers[i].T);
