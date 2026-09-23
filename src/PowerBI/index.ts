@@ -80,11 +80,13 @@ export default class PowerBI {
 
 	decodeListDM(dm: any[], dicts: any[]): Record<string, unknown>[] {
 		const listData: Record<string, unknown>[] = []
-
+		if (dm.length === 0 || (Array.isArray(dm[0].C) && dm[0].C.length === 0)) {
+			//只有一行且第一行是空数据
+			return listData
+		}
 		let lastLineIndexs: (string|null)[] = [] //上一行的字典索引
 		for (const item of dm) {
 			let vacancys: string[] = []
-
 			if (lastLineIndexs.length === 0) {
 				for (const v of item.C) {
 					vacancys.push(String(v))

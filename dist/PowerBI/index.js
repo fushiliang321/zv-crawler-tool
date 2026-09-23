@@ -71,6 +71,10 @@ export default class PowerBI {
     }
     decodeListDM(dm, dicts) {
         const listData = [];
+        if (dm.length === 0 || (Array.isArray(dm[0].C) && dm[0].C.length === 0)) {
+            //只有一行且第一行是空数据
+            return listData;
+        }
         let lastLineIndexs = []; //上一行的字典索引
         for (const item of dm) {
             let vacancys = [];
