@@ -23,4 +23,11 @@ export function exportArr(arr, filename = 'data.csv') {
     }
     exportFile(text, filename);
 }
+export function exportJSON(data, filename = 'data.json') {
+    const text = (typeof data === 'string') ? data : JSON.stringify(data);
+    const blob = new Blob([text], { type: 'application/json;charset=utf-8' });
+    const url = URL.createObjectURL(blob);
+    download(url, filename);
+    URL.revokeObjectURL(url);
+}
 //# sourceMappingURL=index.js.map

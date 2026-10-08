@@ -26,3 +26,11 @@ export function exportArr(arr: unknown[][], filename = 'data.csv'){
     }
     exportFile(text, filename)
 }
+
+export function exportJSON(data: unknown, filename = 'data.json') {
+    const text = (typeof data === 'string') ? data : JSON.stringify(data)
+    const blob = new Blob([text], { type: 'application/json;charset=utf-8' })
+    const url = URL.createObjectURL(blob)
+    download(url,filename)
+    URL.revokeObjectURL(url)
+}
